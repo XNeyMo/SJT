@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Matematicas",
+    "courses": [
+      {
+        "hour": [
+          {
+            "initial_hour": 8,
+            "final_hour": 10
+          },
+          {
+            "initial_hour": 14,
+            "final_hour": 16
+          }
+        ],
+        "nrc": "12345"
+      },
+      {
+        "hour": [
+          {
+            "initial_hour": 9,
+            "final_hour": 11
+          }
+        ],
+        "nrc": "54321"
+      }
+    ]
+  },
+  {
+    "name": "Quimica",
+    "courses": [
+      {
+        "hour": [
+          {
+            "initial_hour": 10,
+            "final_hour": 12
+          },
+          {
+            "initial_hour": 16,
+            "final_hour": 18
+          }
+        ],
+        "nrc": "67890"
+      },
+      {
+        "hour": [
+          {
+            "initial_hour": 11,
+            "final_hour": 13
+          }
+        ],
+        "nrc": "09876"
+      }
+    ]
+  }
+]
