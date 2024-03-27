@@ -4,7 +4,23 @@ import Card from '../components/Card.astro';
 ---
 
 <Layout title="Welcome to SJT">
+	<header class="w-full flex justify-between fixed px-20 py-5 items-center">
+		<a href="#home">
+			<img src="../../public/logo.svg" class="w-36" alt="SAIJITAN Logo">
+		</a>
+
+		<nav class="flex gap-10 font-semibold">
+			<a href="#home">Home</a>
+			<a href="">Features</a>
+			<a href="">How to Use</a>
+		</nav>
+
+		<button class="bg-amethyst-500 text-amethyst-50 px-5 py-2 rounded-xl font-bold hover:bg-amethyst-800 ease-in-out duration-500">Use It</button>
+	</header>
+
 	<main>
-	
+		<section id="home" class="bg-amethyst-50">
+			<h1>hi</h1>
+		</section>
 	</main>
 </Layout>
