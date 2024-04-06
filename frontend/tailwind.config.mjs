@@ -3,7 +3,7 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		colors: {
-			'black': '#263238',
+			'black': '#403246',
 			'white': '#ffffff',
 			'amethyst': {
 				'50': '#faf7fc',
@@ -18,6 +18,9 @@ export default {
 				'900': '#54325d',
 				'950': '#33183a',
 			},
+		},
+		fontFamily: {
+			patrick: ["Patrick Hand", "cursive"],
 		},
 	},
 	plugins: [],

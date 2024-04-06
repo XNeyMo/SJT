@@ -4,23 +4,45 @@ import Card from '../components/Card.astro';
 ---
 
 <Layout title="Welcome to SJT">
-	<header class="w-full flex justify-between fixed px-20 py-5 items-center">
-		<a href="#home">
-			<img src="../../public/logo.svg" class="w-36" alt="SAIJITAN Logo">
-		</a>
+	<header class="w-full bg-amethyst-500 m-20">
+		<div class="bg-amethyst-200">
+			<a href="#home">
+				<img src="../../public/logo.svg" class="w-36" alt="SAIJITAN Logo">
+			</a>
 
-		<nav class="flex gap-10 font-semibold">
-			<a href="#home">Home</a>
-			<a href="">Features</a>
-			<a href="">How to Use</a>
-		</nav>
+			<nav class="flex gap-10 font-semibold hover:*:text-amethyst-500 *:ease-in-out *:duration-500">
+				<a href="#home">Home</a>
+				<a href="#features">Features</a>
+				<a href="#htu">How to Use</a>
+				<a href="#about">About</a>
+			</nav>
 
-		<button class="bg-amethyst-500 text-amethyst-50 px-5 py-2 rounded-xl font-bold hover:bg-amethyst-800 ease-in-out duration-500">Use It</button>
+			<button class="bg-amethyst-500 text-amethyst-50 px-5 py-2 rounded-xl font-bold hover:bg-amethyst-800 ease-in-out duration-500">
+				Use It
+			</button>
+
+		</div>
 	</header>
 
 	<main>
-		<section id="home" class="bg-amethyst-50">
-			<h1>hi</h1>
+		<section id="home" class="bg-amethyst-50 h-screen p-20">
+			<h1>home</h1>
+		</section>
+
+		<section id="features" class="p-20 h-screen">
+			<h1>features</h1>
+		</section>
+
+		<section id="htu" class=" bg-amethyst-50 p-20 h-screen">
+			<h1>How to Use</h1>
+		</section>
+
+		<section id="about" class="p-20 h-screen">
+			<h1>About</h1>
 		</section>
 	</main>
+
+	<footer class="bg-black">
+		<h1>hola</h1>
+	</footer>
 </Layout>
