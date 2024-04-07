@@ -3,7 +3,7 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		colors: {
-			'black': '#403246',
+			'black': '#464148',
 			'white': '#ffffff',
 			'amethyst': {
 				'50': '#faf7fc',

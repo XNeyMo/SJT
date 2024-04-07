@@ -1,45 +1,73 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Feature from '../components/Feature.astro';
 ---
 
 <Layout title="Welcome to SJT">
-	<header class="w-[-moz-available] flex rounded-2xl justify-between items-center bg-amethyst-200 mx-10 my-2 px-10 py-3 fixed top-0">
-		<a href="#home">
-			<img src="../../public/logo.svg" class="w-36" alt="SAIJITAN Logo">
-		</a>
-
-		<nav class="flex gap-10 font-semibold hover:*:text-amethyst-500 *:ease-in-out *:duration-500">
-			<a href="#home">Home</a>
-			<a href="#features">Features</a>
-			<a href="#htu">How to Use</a>
-			<a href="#about">About</a>
-		</nav>
-
-		<button class="bg-amethyst-500 text-amethyst-50 px-5 py-2 rounded-xl font-bold hover:bg-amethyst-800 ease-in-out duration-500">
-			Use It
-		</button>
-	</header>
+	<Header />
 
 	<main>
-		<section id="home" class="bg-amethyst-50 h-screen p-20">
-			<h1>home</h1>
+		<section id="home" class="bg-amethyst-50 h-screen p-20 flex justify-between items-center">
+			<aside class="w-6/12 flex flex-col gap-6 justify-center">
+				<h1 class="text-6xl">
+					Make sure you have the best <span class="text-amethyst-500">schedule possible</span>
+				</h1>
+
+				<p>You can count on me</p>
+
+				<button class="bg-amethyst-500 text-amethyst-50 px-5 py-2 rounded-xl font-bold hover:bg-amethyst-800 ease-in-out duration-500 w-[100px]">
+					Use It
+				</button>
+			</aside>
+			
+			<div class="w-6/12 h-full flex justify-center items-center">
+				<img src="../../public/schedule.svg" alt="Hero" class="h-3/4" />
+			</div>
 		</section>
 
-		<section id="features" class="p-20 h-screen">
-			<h1>features</h1>
+		<section id="features" class="p-20 h-auto">
+			<Feature 
+				type="flex-row"
+				title="Schedule with less time at the university"
+				body="Our innovative platform simplifies the task of finding the ideal university schedule for you. Simply entering your subjects will take care of searching and calculating the most efficient combinations, ensuring that you spend less time at university and more time doing what you love."
+				imgsrc="../../public/time.svg"
+			/>
 		</section>
 
-		<section id="htu" class=" bg-amethyst-50 p-20 h-screen">
-			<h1>How to Use</h1>
+		<section id="htu" class="bg-amethyst-50 p-20 flex flex-col justify-center items-center h-screen">
+			<h1 class="text-8xl text-amethyst-500">COMMING SOON</h1>
 		</section>
 
-		<section id="about" class="p-20 h-screen">
-			<h1>About</h1>
+		<section id="about" class="p-20 h-auto flex flex-col justify-center gap-5">
+			<h1>Hi There, 👋</h1>
+
+			<p>I'm <span class="text-amethyst-500">Neyan Montes</span>, also known as XNeyMo, and I'm a frontend developer passionate about the design and construction of websites and web applications, as well as software.</p>
+
+			<p>In my university studies I've always had the possibility of creating my own schedules taking into account the subjects and courses available.</p>
+
+			<p>However, since there are so many options, I've always thought that, perhaps, the schedule I chose is not the most optimal, that is why, in my last semesters I made an Excel with all the possibilities and saw which one was the best for me.</p>
+
+			<p>Until, as a programmer, I decided to create an algorithm to find the best possible schedule, that schedule that I call "perfect" since I didn't spend much time at university.</p>
+
+			<p>I presented this project to my friends and they told me to post it so I could help more college students who are in the same situation, who aren't sure if the schedule they created is really the best one out there.</p>
+
+			<p>I will update this project with more features that I have in mind for the future, such as:</p>
+
+			<ul class="list-disc pl-14">
+				<li>Schedule without much space between classes</li>
+				<li>Schedule with fewer possible days</li>
+			</ul>
+
+			<p>I hope my project is useful to you.</p>
+			
+			<div>
+				<p>Sincerely,</p>
+				<span class="text-amethyst-500">Neyan Montes</span> (XNeyMo)
+			</div>
 		</section>
 	</main>
 
-	<footer class="bg-black">
-		<h1>hola</h1>
-	</footer>
+	<Footer />
 </Layout>
