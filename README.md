@@ -1,5 +1,5 @@
 <div align='center'>
-  <img src='https://github.com/XNeyMo/SJT/blob/main/assets/Saijitan.png' width='400' alt='Logo' />
+  <img src='https://github.com/XNeyMo/SJT/blob/main/assets/SAIJITAN.png' alt='Logo' />
 </div>
 
 ---
