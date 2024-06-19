@@ -1,178 +1,282 @@
-use actix_web::{get, post, web, App, HttpServer, Responder};
-use std::collections::HashMap;
-use std::io;
+#![allow(warnings)]
+use std::{collections::HashMap, io, u32};
 
 #[derive(Debug)]
 struct Subject {
-    name: String,
-    course: Vec<Course>,
-    //  laboratory: Vec<Laboratory>,
+    courses: Vec<Course>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Course {
-    space: Vec<Space>,
-    nrc: String,
+    name: String,
+    id: String,
+    schedules: Vec<Schedule>,
 }
 
-// #[derive(Debug)]
-// struct Laboratory {
-//     course_nrc: String,
-//     space: Vec<Space>,
-//     nrc: String,
-// }
-
-#[derive(Debug)]
-struct Space {
-    day: String,
-    start_time: u32,
-    ending_time: u32,
+#[derive(Debug, Clone)]
+struct Schedule {
+    day: Days,
+    start: u32,
+    end: u32,
 }
 
-fn generate_combinations<'a>(
-    subjects: &'a [Subject],
-    current_index: usize,
-    current_combination: &mut Vec<&'a Course>,
-    combinations: &mut Vec<Vec<&'a Course>>,
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+enum Days {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday,
+}
+
+fn schedule_information() -> Schedule {
+    println!("1. Monday");
+    println!("2. Tuesday");
+    println!("3. Wednesday");
+    println!("4. Thursday");
+    println!("5. Friday");
+    println!("6. Saturday");
+    println!("7. Sunday");
+
+    println!("\nChoise the number's option: ");
+    let mut o_input = String::new();
+    io::stdin().read_line(&mut o_input).unwrap();
+    let option: u8 = o_input.trim().parse().unwrap();
+
+    let day: Days = match option {
+        1 => Days::Monday,
+        2 => Days::Tuesday,
+        3 => Days::Wednesday,
+        4 => Days::Thursday,
+        5 => Days::Friday,
+        6 => Days::Saturday,
+        7 => Days::Sunday,
+        _ => panic!("Invalid option"),
+    };
+
+    println!("\nEnter the start time: ");
+    let mut s_input = String::new();
+    io::stdin().read_line(&mut s_input).unwrap();
+    let start: u32 = s_input.trim().parse().unwrap();
+
+    println!("\nEnter the end time: ");
+    let mut e_input = String::new();
+    io::stdin().read_line(&mut e_input).unwrap();
+    let end: u32 = e_input.trim().parse().unwrap();
+
+    let schedule: Schedule = Schedule { day, start, end };
+
+    return schedule;
+}
+
+fn course_information(days: u8, name: String) -> Course {
+    println!("\nEnter the ID of this course: ");
+    let mut i_input = String::new();
+    io::stdin().read_line(&mut i_input).unwrap();
+    let id = i_input.trim().replace("\r\n", "");
+
+    let mut schedules: Vec<Schedule> = Vec::new();
+
+    for k in 0..days {
+        println!("\nDay {}", k + 1);
+        let schedule = schedule_information();
+        schedules.push(schedule);
+    }
+
+    let course: Course = Course {
+        name,
+        id,
+        schedules,
+    };
+    return course;
+}
+
+fn subject_information() -> Subject {
+    println!("\nEnter the name of subject: ");
+    let mut n_input = String::new();
+    io::stdin().read_line(&mut n_input).unwrap();
+    let name = n_input.trim().replace("\r\n", "");
+
+    println!("\nEnter the number of {} courses: ", name);
+    let mut c_input = String::new();
+    io::stdin().read_line(&mut c_input).unwrap();
+    let c_number: u8 = c_input.trim().parse().unwrap();
+
+    println!("\nEnter the day's number of {}: ", name);
+    let mut d_input = String::new();
+    io::stdin().read_line(&mut d_input).unwrap();
+    let days: u8 = d_input.trim().parse().unwrap();
+
+    let mut courses: Vec<Course> = Vec::new();
+
+    for j in 0..c_number {
+        println!("\nCourse {} of {}", j + 1, name);
+        let course: Course = course_information(days, name.clone());
+        courses.push(course);
+    }
+
+    let subject: Subject = Subject { courses };
+    return subject;
+}
+
+fn generate_combinations(
+    subjects: &[Subject],
+    index: usize,
+    current_combination: &mut Vec<Course>,
+    combinations: &mut Vec<Vec<Course>>,
 ) {
-    if current_index >= subjects.len() {
+    if index >= subjects.len() {
         combinations.push(current_combination.clone());
         return;
     }
 
-    for course in &subjects[current_index].course {
-        if current_combination
-            .iter()
-            .all(|c| !conflicts_with(course, c))
-        {
-            current_combination.push(course);
-            generate_combinations(
-                subjects,
-                current_index + 1,
-                current_combination,
-                combinations,
-            );
-            current_combination.pop();
-        }
+    for course in &subjects[index].courses {
+        current_combination.push(course.clone());
+        generate_combinations(subjects, index + 1, current_combination, combinations);
+        current_combination.pop();
     }
 }
 
-fn conflicts_with(course1: &Course, course2: &Course) -> bool {
-    course1.space.iter().any(|space1| {
-        course2.space.iter().any(|space2| {
-            space1.day == space2.day
-                && space1.start_time < space2.ending_time
-                && space1.ending_time > space2.start_time
-        })
-    })
+fn validation(combination: &[Course]) -> bool {
+    for i in 0..combination.len() {
+        for j in (i + 1)..combination.len() {
+            if courses_overlap(&combination[i], &combination[j]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 
-fn calculate_points(combination: &[&Course]) -> u32 {
-    let mut total_points = 0;
-    let mut day_schedule = HashMap::new();
+fn courses_overlap(first_course: &Course, second_course: &Course) -> bool {
+    for first_schedule in &first_course.schedules {
+        for second_schedule in &second_course.schedules {
+            if first_schedule.day == second_schedule.day
+                && time_overlap(first_schedule, second_schedule)
+            {
+                return true;
+            }
+        }
+    }
 
-    for day in ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"].iter() {
-        day_schedule.insert(*day, (0, 0));
+    return false;
+}
+
+fn time_overlap(first_schedule: &Schedule, second_schedule: &Schedule) -> bool {
+    first_schedule.day == second_schedule.day
+        && !(first_schedule.end <= second_schedule.start
+            || first_schedule.start >= second_schedule.end)
+}
+
+fn calculate_points(combination: &[Course]) -> u32 {
+    let mut points = 0;
+
+    let mut daily_min_start: HashMap<Days, u32> = HashMap::new();
+    let mut daily_max_end: HashMap<Days, u32> = HashMap::new();
+
+    for day in &[
+        Days::Monday,
+        Days::Tuesday,
+        Days::Wednesday,
+        Days::Thursday,
+        Days::Friday,
+        Days::Saturday,
+        Days::Sunday,
+    ] {
+        daily_min_start.insert(day.clone(), u32::MAX);
+        daily_max_end.insert(day.clone(), 0);
     }
 
     for course in combination {
-        for space in &course.space {
-            let (start, end) = day_schedule.entry(&space.day).or_insert((0, 0));
-            *start = (*start).min(space.start_time);
-            *end = (*end).max(space.ending_time);
+        for schedule in &course.schedules {
+            let day = schedule.day.clone();
+            let start = schedule.start;
+            let end = schedule.end;
+
+            if start < *daily_min_start.get(&day).unwrap() {
+                daily_min_start.insert(day.clone(), start);
+            }
+
+            if end > *daily_max_end.get(&day).unwrap() {
+                daily_max_end.insert(day.clone(), end);
+            }
         }
     }
 
-    for (_, (start, end)) in &day_schedule {
-        if *start != 0 && *end != 0 {
-            total_points += end - start;
+    for day in &[
+        Days::Monday,
+        Days::Tuesday,
+        Days::Wednesday,
+        Days::Thursday,
+        Days::Friday,
+        Days::Saturday,
+        Days::Sunday,
+    ] {
+        let min_start = *daily_min_start.get(&day).unwrap();
+        let max_end = *daily_max_end.get(&day).unwrap();
+
+        if max_end > min_start {
+            points += (max_end - min_start);
         }
     }
 
-    total_points
+    points
 }
 
 fn main() {
-    println!("------------ Schedule Maker ------------");
+    println!("Enter the number of subject: ");
+    let mut s_input = String::new();
+    io::stdin().read_line(&mut s_input).unwrap();
+    let s_number: u8 = s_input.trim().parse().unwrap();
 
-    let subjects: Vec<Subject> = get_subjects();
+    let mut subjects: Vec<Subject> = Vec::new();
 
-    let mut combinations = Vec::new();
-    generate_combinations(&subjects, 0, &mut Vec::new(), &mut combinations);
+    for i in 0..s_number {
+        println!("\nSubject {}", i + 1);
+        let subject: Subject = subject_information();
+        subjects.push(subject);
+    }
 
-    if let Some(best_combination) = combinations
+    let mut combinations: Vec<Vec<Course>> = Vec::new();
+    let mut current_combination: Vec<Course> = Vec::new();
+
+    generate_combinations(&subjects, 0, &mut current_combination, &mut combinations);
+
+    let valid_combinations: Vec<Vec<Course>> = combinations
         .into_iter()
-        .min_by_key(|comb| calculate_points(comb))
-    {
-        println!("\nThe best schedule is made up of the following NRC:");
-        for course in best_combination {
-            println!("NRC: {}", course.nrc);
-        }
-    } else {
-        println!("No valid schedule found");
+        .filter(|combination| validation(combination))
+        .collect();
+
+    let mut ranking: Vec<(Vec<Course>, u32)> = valid_combinations
+        .iter()
+        .map(|combination| {
+            let points = calculate_points(combination);
+            (combination.clone(), points)
+        })
+        .collect();
+
+    ranking.sort_by(|(_, points1), (_, points2)| points1.cmp(points2));
+
+    for (index, rank) in ranking.iter().enumerate() {
+        println!("\nOpción {}:", index + 1);
+        println!("- Courses: {}", format_courses(&rank.0));
+        println!("- Points: {}", rank.1);
     }
 }
 
-fn get_subjects() -> Vec<Subject> {
-    println!("\nHow many subjects do you want?: ");
-    let mut s = String::new();
-    io::stdin().read_line(&mut s).unwrap();
-    let s: usize = s.trim().parse().unwrap();
+fn format_courses(courses: &[Course]) -> String {
+    let mut course_list = String::new();
 
-    (1..=s)
-        .map(|_| {
-            println!("\nEnter the subject's name: ");
-            let mut name = String::new();
-            io::stdin().read_line(&mut name).unwrap();
+    for (index, course) in courses.iter().enumerate() {
+        if index > 0 {
+            course_list.push_str(", ");
+        }
 
-            println!("\nHow many courses does it have?: ");
-            let mut c = String::new();
-            io::stdin().read_line(&mut c).unwrap();
-            let c: usize = c.trim().parse().unwrap();
+        course_list.push_str(&format!("{} ({})", course.name, course.id));
+    }
 
-            println!("\nHow many days a week is it repeated?: ");
-            let mut d = String::new();
-            io::stdin().read_line(&mut d).unwrap();
-            let d: u8 = d.trim().parse().unwrap();
-
-            let mut courses = Vec::with_capacity(c);
-            for _ in 1..=c {
-                let mut space = Vec::new();
-                println!("\nCourse:");
-
-                for _ in 1..=d {
-                    println!("\nEnter the day's name: ");
-                    let mut day = String::new();
-                    io::stdin().read_line(&mut day).unwrap();
-
-                    println!("\nEnter the start time: ");
-                    let mut start_time = String::new();
-                    io::stdin().read_line(&mut start_time).unwrap();
-                    let start_time: u32 = start_time.trim().parse().unwrap();
-
-                    println!("\nEnter the ending time: ");
-                    let mut ending_time = String::new();
-                    io::stdin().read_line(&mut ending_time).unwrap();
-                    let ending_time: u32 = ending_time.trim().parse().unwrap();
-
-                    space.push(Space {
-                        day,
-                        start_time,
-                        ending_time,
-                    });
-                }
-
-                println!("\nWrite the NRC: ");
-                let mut nrc = String::new();
-                io::stdin().read_line(&mut nrc).unwrap();
-
-                courses.push(Course { space, nrc });
-            }
-
-            Subject {
-                name,
-                course: courses,
-            }
-        })
-        .collect()
+    return course_list;
 }
