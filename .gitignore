@@ -1,4 +1,5 @@
-backend/target
+backend/node_modules/
+backend/dist/
 
 # build output
 frontend/dist/
