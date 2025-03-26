@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Patrick_Hand } from "next/font/google";
+import "@styles/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const patrickHand = Patrick_Hand({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Saijitan",
@@ -15,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={patrickHand.className}>{children}</body>
     </html>
   );
 }
