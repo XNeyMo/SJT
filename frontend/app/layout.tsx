@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={patrickHand.className}>{children}</body>
+      <body className={`${patrickHand.className} max-w-[1366px] mx-auto min-h-screen`}>
+        {children}
+      </body>
     </html>
   );
 }
