@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from "react";
-import LandingHeader from "@components/LandingHeader";
+import LandingHeader from "@components/header/LandingHeader";
 import { CalendarDays, Clock, Search, Sliders } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "@components/Footer";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"software" | "me">("software");
@@ -182,7 +183,7 @@ export default function Home() {
               <>
                 <h3 className="text-2xl font-semibold">Hi There, 👋 I'm Neyan Montes</h3>
                 <p className="text-gray-600 mt-4">
-                  Also known as <strong>XNeyMo</strong>, I'm a frontend developer passionate about designing and building web applications.
+                  Also known as <strong>XNeyMo</strong>, I'm a software developer passionate about designing and building web applications.
                   As a university student, I always created my own schedules, but I wondered if they were truly optimal.
                   I started with an Excel sheet, but later, as a programmer, I developed this algorithm to find the perfect schedule.
                   After sharing it with friends, they encouraged me to publish it to help more students.
@@ -193,6 +194,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   )
 }

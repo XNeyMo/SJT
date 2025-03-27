@@ -1,7 +1,9 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 
-export default function DefaultHeader() {
+export default function LandingHeader() {
 	return (
 		<header
 			className="
@@ -20,16 +22,7 @@ export default function DefaultHeader() {
 				/>
 			</Link>
 
-			<Link
-				className="
-					font-semibold hover:text-amethyst-500
-					ease-in-out duration-500
-				"
-
-				href="/landing"
-			>
-				Learn More
-			</Link>
+			<Link href="/landing">Learn More</Link>
 		</header>
 	);
 }
