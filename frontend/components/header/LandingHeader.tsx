@@ -47,6 +47,7 @@ export default function LandingHeader() {
 				<Link href="#features" onClick={() => setMenuOpen(false)}>Features</Link>
 				<Link href="#htu" onClick={() => setMenuOpen(false)}>How to Use</Link>
 				<Link href="#about" onClick={() => setMenuOpen(false)}>About</Link>
+				<Link href="#support" onClick={() => setMenuOpen(false)}>Support</Link>
 			</nav>
 
 			<div className="flex gap-5 items-center">

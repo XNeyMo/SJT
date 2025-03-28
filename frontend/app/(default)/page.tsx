@@ -6,6 +6,10 @@ export default function Home() {
     <main>
       <DefaultHeader />
 
+      <section className="h-screen">
+
+      </section>
+
       <Footer />
     </main>
   )

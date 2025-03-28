@@ -195,6 +195,32 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="min-h-screen p-20 flex flex-col items-center justify-center gap-14" id="support">
+        <div className="flex flex-col md:flex-row items-center gap-10 w-full max-w-5xl">
+          <Image
+            src="/assets/images/support.png"
+            width={400}
+            height={250}
+            className="rounded-lg"
+            alt="Support Us"
+          />
+
+          <div className="text-center md:text-left max-w-lg">
+            <h3 className="text-2xl font-semibold">Help Keep This Project Alive</h3>
+
+            <p className="text-gray-600 mt-4">
+              This software is free for everyone, but maintaining and improving it takes time and resources. If you find it useful, consider making a donation to support development.
+            </p>
+
+            <Link href="https://www.buymeacoffee.com/xneymo" target="_blank">
+              <button className="px-6 cursor-pointer py-3 bg-yellow-500 mt-6 text-white font-bold rounded-lg hover:bg-yellow-600 transition">
+                ☕ Buy Me a Coffee
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   )
