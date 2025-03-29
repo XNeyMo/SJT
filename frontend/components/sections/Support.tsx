@@ -1,5 +1,6 @@
 import { Coffee, GitHub } from "@mui/icons-material";
 import Link from "next/link";
+import { JSX } from "react";
 
 export default function SupportSection() {
 	return (
@@ -48,7 +49,21 @@ export default function SupportSection() {
 	);
 }
 
-function SupportButton({ href, icon, text, bgClass, hoverClass }) {
+interface SupportButtonProps {
+	href: string;
+	icon: JSX.Element;
+	text: string;
+	bgClass: string;
+	hoverClass: string;
+}
+
+function SupportButton({
+	href,
+	icon,
+	text,
+	bgClass,
+	hoverClass
+}: SupportButtonProps) {
 	return (
 		<Link
 			href={href}
