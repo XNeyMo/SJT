@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function ImportFile() {
 	const [file, setFile] = useState(null);
 
-	const handleFileChange = (e) => {
+	const handleFileChange = (e: any) => {
 		const selectedFile = e.target.files[0];
 
 		if (selectedFile) {
