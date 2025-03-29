@@ -1,13 +1,24 @@
-import type { Metadata } from "next";
-import { Patrick_Hand } from "next/font/google";
-import "@styles/globals.css";
+'use client';
 
-const patrickHand = Patrick_Hand({ weight: "400", subsets: ["latin"] });
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { createTheme, ThemeProvider } from "@mui/material";
 
-export const metadata: Metadata = {
-  title: "Saijitan",
-  description: "Find the best schedule for you",
-};
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
+})
 
 export default function RootLayout({
   children,
@@ -16,8 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${patrickHand.className} max-w-[1366px] mx-auto min-h-screen`}>
-        {children}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider theme={theme}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
