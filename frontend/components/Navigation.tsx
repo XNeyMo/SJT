@@ -4,7 +4,7 @@ export default function Navigation() {
 	return (
 		<ul className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
 			{[
-				{ href: "/", label: "Home" },
+				{ href: "/landing", label: "Home" },
 				{ href: "/landing#features", label: "Features" },
 				{ href: "/landing#htu", label: "How to Use" },
 				{ href: "/landing#support", label: "Support" },

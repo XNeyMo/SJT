@@ -1,10 +1,25 @@
 import Image from "next/image";
 import Navigation from "./Navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Close } from "@mui/icons-material";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+	const path = usePathname();
+
+	const [buttonInfo, setButtonInfo] = useState({
+		text: "Contact Me",
+		link: "/contact",
+	});
+
+	useEffect(() => {
+		setButtonInfo(path === "/contact"
+			? { text: "Get Started", link: "/" }
+			: { text: "Contact Me", link: "/contact" }
+		);
+	}, [path]);
+
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	return (
@@ -19,12 +34,11 @@ export default function Header() {
 				<Navigation />
 			</nav>
 
-			<Link href="/contact" className="hidden lg:block">
-				<button
-					className="px-5 py-1 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold transition duration-500"
-				>
-					Contact Us
-				</button>
+			<Link
+				href={buttonInfo.link}
+				className="hidden lg:block px-5 py-1 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold transition duration-500"
+			>
+				{buttonInfo.text}
 			</Link>
 
 			<button
@@ -39,12 +53,11 @@ export default function Header() {
 					className="absolute top-16 left-0 w-full bg-black border border-white/10 shadow-lg rounded-b-3xl flex flex-col items-center gap-5 py-6 transition-all duration-500"
 				>
 					<Navigation />
-					<Link href="/contact">
-						<button
-							className="px-5 py-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold transition duration-500"
-						>
-							Contact Us
-						</button>
+					<Link
+						href={buttonInfo.link}
+						className="px-5 py-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold transition duration-500 cursor-pointer"
+					>
+						{buttonInfo.text}
 					</Link>
 				</div>
 			)}
