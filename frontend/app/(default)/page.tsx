@@ -36,7 +36,7 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="w-full md:w-1/2 flex justify-center">
+        <div className="w-full md:w-1/2 flex justify-center text-start">
           {useWizard ? <Wizard /> : <ImportFile />}
         </div>
       </section>
