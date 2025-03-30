@@ -20,20 +20,14 @@ export default function HowToUseSection() {
 
 				<button
 					onClick={() => setIsManual(!isManual)}
-					className="
-            py-2 px-4 w-40 mx-auto md:mx-0
-            bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl
-            hover:from-[#FFA9CC] hover:to-[#FEECE3]
-            text-black font-semibold
-            transition-all duration-300
-          "
+					className="py-2 px-4 w-40 mx-auto md:mx-0 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold transition-all duration-300"
 				>
 					{isManual ? "Wizard Mode" : "Import Mode"}
 				</button>
 
 				{/* Lista de Pasos */}
 				<div className="flex flex-col gap-5">
-					<ul className="space-y-4">
+					<ul className="space-y-4 w-full">
 						{isManual ? (
 							<>
 								<Step number="1" text="Select your preferred schedule type." />
@@ -65,10 +59,11 @@ export default function HowToUseSection() {
 // Componente reutilizable para cada paso
 function Step({ number, text }: { number: string; text: string }) {
 	return (
-		<li className="flex items-center gap-3 text-sm sm:text-base">
-			<span className="bg-[#FFA9CC] text-black font-bold w-8 h-8 flex items-center justify-center rounded-full">
+		<li className="flex items-center text-start gap-3 text-sm sm:text-base">
+			<span className="bg-[#FFA9CC] text-black font-bold min-w-8 h-8 flex items-center justify-center rounded-full">
 				{number}
 			</span>
+
 			{text}
 		</li>
 	);
