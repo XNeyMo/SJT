@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { LessHoursAPI } from "../../hooks/schedule/less-hours";
 
 interface ForthCardProps {
@@ -11,12 +11,14 @@ export default function ForthCard({
 	const router = useRouter();
 
 	const sendResume = async () => {
-		const response = await LessHoursAPI.generateSchedule(subjects);
-		localStorage.setItem("schedule", JSON.stringify(response));
-
-		setTimeout(() => {
+		try {
+			const response = await LessHoursAPI.generateSchedule(subjects);
+			localStorage.setItem("schedule", JSON.stringify(response));
+		} catch (error) {
+			console.error("Error fetching resume:", error);
+		} finally {
 			router.push("/schedule");
-		}, 2000);
+		}
 	}
 
 	return (
