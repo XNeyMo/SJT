@@ -18,7 +18,7 @@ export default function HeroSection() {
 
 			<Link
 				href="/"
-				className="py-2 px-6 md:w-1/6 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold text-center transition duration-500 cursor-pointer text-sm md:text-base"
+				className="py-2 px-6 md:w-1/6 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! text-center transition duration-500 cursor-pointer text-sm md:text-base"
 			>
 				Get Started Now
 			</Link>

@@ -15,7 +15,7 @@ export default function FeatureSection() {
 					<div className="bg-gradient-to-br from-[#FEECE3] to-[#FFA9CC] rounded-2xl p-4 flex items-center justify-center">
 						<Update fontSize="large" className="text-black" />
 					</div>
-					<h3 className="text-lg font-semibold text-center">Optimized Scheduling</h3>
+					<h3 className="text-lg font-semibold! text-center">Optimized Scheduling</h3>
 					<p className="text-center text-sm sm:text-base">
 						Get the most efficient schedule possible, avoiding unnecessary gaps between classes.
 					</p>
@@ -25,7 +25,7 @@ export default function FeatureSection() {
 					<div className="bg-gradient-to-br from-[#FEECE3] to-[#FFA9CC] rounded-2xl p-4 flex items-center justify-center">
 						<SelfImprovement fontSize="large" className="text-black" />
 					</div>
-					<h3 className="text-lg font-semibold text-center">Save Time & Effort</h3>
+					<h3 className="text-lg font-semibold! text-center">Save Time & Effort</h3>
 					<p className="text-center text-sm sm:text-base">
 						No more trial and error—our algorithm does the hard work for you in seconds.
 					</p>
@@ -35,7 +35,7 @@ export default function FeatureSection() {
 					<div className="bg-gradient-to-br from-[#FEECE3] to-[#FFA9CC] rounded-2xl p-4 flex items-center justify-center">
 						<AutoAwesome fontSize="large" className="text-black" />
 					</div>
-					<h3 className="text-lg font-semibold text-center">Fully Customizable</h3>
+					<h3 className="text-lg font-semibold! text-center">Fully Customizable</h3>
 					<p className="text-center text-sm sm:text-base">
 						Choose your ideal schedule—less time on campus, free days, or the perfect balance.
 					</p>

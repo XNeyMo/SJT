@@ -58,7 +58,7 @@ export default function Contact() {
             </div>
 
             <button
-              className="px-4 py-2 w-full md:w-2/5 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold ease-in-out duration-500 cursor-pointer flex items-center justify-center gap-2"
+              className="px-4 py-2 w-full md:w-2/5 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! ease-in-out duration-500 cursor-pointer flex items-center justify-center gap-2"
             >
               <Send /> Send
             </button>
@@ -85,19 +85,19 @@ export default function Contact() {
               <Link
                 href="https://www.linkedin.com/in/neyanmontes/"
                 target="_blank" rel="noopener noreferrer"
-                className="p-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold ease-in-out duration-500 flex justify-center"
+                className="p-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! ease-in-out duration-500 flex justify-center"
               >
                 <LinkedIn />
               </Link>
 
-              <Link href="https://www.github.com/XNeyMo/" target="_blank" rel="noopener noreferrer" className="p-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold ease-in-out duration-500 flex justify-center">
+              <Link href="https://www.github.com/XNeyMo/" target="_blank" rel="noopener noreferrer" className="p-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! ease-in-out duration-500 flex justify-center">
                 <GitHub />
               </Link>
 
               <Link
                 href="https://www.x.com/xneymodev/"
                 target="_blank" rel="noopener noreferrer"
-                className="p-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold ease-in-out duration-500 flex justify-center"
+                className="p-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! ease-in-out duration-500 flex justify-center"
               >
                 <X />
               </Link>
@@ -105,7 +105,7 @@ export default function Contact() {
               <Link
                 href="mailto:xneymodev@protonmail.com"
                 target="_blank" rel="noopener noreferrer"
-                className="p-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold ease-in-out duration-500 flex justify-center"
+                className="p-2 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-md hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! ease-in-out duration-500 flex justify-center"
               >
                 <Email />
               </Link>

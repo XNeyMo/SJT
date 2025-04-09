@@ -20,7 +20,7 @@ export default function HowToUseSection() {
 
 				<button
 					onClick={() => setIsManual(!isManual)}
-					className="py-2 px-4 w-40 mx-auto md:mx-0 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold transition-all duration-300"
+					className="py-2 px-4 w-40 mx-auto md:mx-0 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! transition-all duration-300"
 				>
 					{isManual ? "Wizard Mode" : "Import Mode"}
 				</button>

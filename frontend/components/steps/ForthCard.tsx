@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { LessHoursAPI } from "../../hooks/schedule/less-hours";
-import { useNotifications } from "@toolpad/core";
+import { notifications } from "@mantine/notifications";
 
 interface ForthCardProps {
 	subjects: any;
@@ -12,28 +12,30 @@ export default function ForthCard({
 	subjects,
 }: ForthCardProps) {
 	const router = useRouter();
-	const notifications = useNotifications();
 
 	const sendResume = async () => {
-		notifications.show("Processing request, please wait...", {
-			severity: "info",
-			autoHideDuration: 4000,
+		notifications.show({
+			title: "Generating schedule",
+			message: "Please wait a moment.",
+			color: "blue",
 		});
 
 		try {
 			const response = await LessHoursAPI.generateSchedule(subjects);
 			localStorage.setItem("schedule", JSON.stringify(response));
 
-			notifications.show("Request completed successfully", {
-				severity: "success",
-				autoHideDuration: 4000,
+			notifications.show({
+				title: "Schedule generated",
+				message: "Your schedule has been generated successfully.",
+				color: "green",
 			});
 
 			router.push("/schedule");
 		} catch (error) {
-			notifications.show("An error occurred during your request", {
-				severity: "error",
-				autoHideDuration: 4000,
+			notifications.show({
+				title: "Error",
+				message: "An error occurred while generating the schedule.",
+				color: "red",
 			});
 		}
 	}
@@ -70,7 +72,7 @@ export default function ForthCard({
 						px-4 py-2 w-1/4
 						bg-linear-[135deg] from-[#FEECE3] to-[#FFA9CC] rounded-md
 						hover:from-[#FFA9CC] hover:to-[#FEECE3]
-						text-black font-semibold
+						text-black font-semibold!
 						ease-in-out duration-500
 						cursor-pointer
 					"

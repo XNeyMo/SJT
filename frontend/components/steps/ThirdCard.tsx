@@ -53,7 +53,7 @@ export default function ThirdCard({
 							bg-linear-[135deg] from-[#FEECE3] to-[#FFA9CC]
 							rounded-md
 							hover:from-[#FFA9CC] hover:to-[#FEECE3]
-							text-black font-semibold
+							text-black font-semibold!
 							ease-in-out duration-500
 							cursor-pointer
 						"
@@ -99,7 +99,7 @@ export default function ThirdCard({
 					onClick={handleBack}
 					className="
 						px-4 py-2 w-1/4
-						text-white font-semibold
+						text-white font-semibold!
 						ease-in-out duration-500
 						hover:bg-linear-[135deg] hover:from-[#FEECE3]/7 hover:to-[#FFA9CC]/7
 						bg-linear-[135deg] from-[#FEE3D5]/3 to-[#FFA9CC]/3 rounded-md
@@ -115,7 +115,7 @@ export default function ThirdCard({
 						px-4 py-2 w-1/4
 						bg-linear-[135deg] from-[#FEECE3] to-[#FFA9CC] rounded-md
 						hover:from-[#FFA9CC] hover:to-[#FEECE3]
-						text-black font-semibold
+						text-black font-semibold!
 						ease-in-out duration-500
 						cursor-pointer
 					"

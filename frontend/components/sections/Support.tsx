@@ -69,7 +69,7 @@ function SupportButton({
 			href={href}
 			target="_blank"
 			rel="noopener noreferrer"
-			className={`px-4 py-2 w-full sm:w-auto rounded-md flex items-center gap-3 text-black font-semibold transition-all duration-300 ${bgClass} ${hoverClass}`}
+			className={`px-4 py-2 w-full sm:w-auto rounded-md flex items-center gap-3 text-black font-semibold! transition-all duration-300 ${bgClass} ${hoverClass}`}
 		>
 			{icon}
 			<p>{text}</p>

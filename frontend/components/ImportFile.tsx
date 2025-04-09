@@ -31,7 +31,7 @@ export default function ImportFile() {
 						px-4 py-2 w-2/5 self-end text-center
 						bg-linear-[135deg] from-[#FEECE3] to-[#FFA9CC] rounded-3xl
 						hover:from-[#FFA9CC] hover:to-[#FEECE3]
-						text-black font-semibold
+						text-black font-semibold!
 						ease-in-out duration-500
 						cursor-pointer
 					"
@@ -69,7 +69,7 @@ export default function ImportFile() {
 						px-4 py-2 w-1/4
 						bg-linear-[135deg] from-[#FEECE3] to-[#FFA9CC] rounded-md
 						hover:from-[#FFA9CC] hover:to-[#FEECE3]
-						text-black font-semibold
+						text-black font-semibold!
 						ease-in-out duration-500
 						cursor-pointer
 					"

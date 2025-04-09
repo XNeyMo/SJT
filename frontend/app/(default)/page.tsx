@@ -28,7 +28,7 @@ export default function Home() {
               py-2 px-6 w-2/3 md:w-1/3
               bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl
               hover:from-[#FFA9CC] hover:to-[#FEECE3]
-              text-black font-semibold
+              text-black font-semibold!
               transition duration-500 cursor-pointer text-sm md:text-base
             "
           >
