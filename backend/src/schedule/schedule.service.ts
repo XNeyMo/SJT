@@ -3,6 +3,7 @@ import { SubjectDto } from './dto/subject.dto';
 import { CourseDto } from './dto/course.dto';
 import { ScheduleDto } from './dto/schedule.dto';
 import { FullInformationDto } from './dto/fullInformation.dto';
+import * as XLSX from 'xlsx';
 
 @Injectable()
 export class ScheduleService {
@@ -101,5 +102,38 @@ export class ScheduleService {
       combination: result.best,
     };
   }
-}
 
+  processExcel(file: Express.Multer.File) {
+    const workbook = XLSX.read(file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    const jsonData = XLSX.utils.sheet_to_json(sheet, { range: "A1:E1000" }) as any[];
+
+    const subjectMap = new Map<string, SubjectDto>();
+
+    for (const row of jsonData) {
+      const subjectName = row['SUBJECT'];
+      const courseCode = row['COURSE'];
+      const day = String(row['DAY']).toLowerCase();
+      const startTime = Number(row['START TIME']);
+      const endTime = Number(row['END TIME']);
+
+      if (!subjectMap.has(subjectName)) {
+        subjectMap.set(subjectName, { name: subjectName, courses: [] });
+      }
+
+      const subject = subjectMap.get(subjectName)!;
+      let course = subject.courses.find(c => c.code === courseCode);
+
+      if (!course) {
+        course = { code: courseCode, schedule: [] };
+        subject.courses.push(course);
+      }
+
+      course.schedule.push({ day, startTime, endTime });
+    }
+
+    const subjects: SubjectDto[] = Array.from(subjectMap.values());
+    return this.parseAndProcess(subjects);
+  }
+}

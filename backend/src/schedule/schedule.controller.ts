@@ -1,4 +1,5 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ScheduleService } from './schedule.service';
 import { SubjectDto } from './dto/subject.dto';
 
@@ -6,8 +7,14 @@ import { SubjectDto } from './dto/subject.dto';
 export class ScheduleController {
   constructor(private readonly scheduleService: ScheduleService) { }
 
-  @Post('parse')
+  @Post('wizard')
   parseSchedule(@Body() subjects: SubjectDto[]) {
     return this.scheduleService.parseAndProcess(subjects);
+  }
+
+  @Post('file')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadSchedule(@UploadedFile() file: Express.Multer.File) {
+    return this.scheduleService.processExcel(file);
   }
 }
