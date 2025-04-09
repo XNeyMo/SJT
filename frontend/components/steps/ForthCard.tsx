@@ -1,5 +1,8 @@
+'use client'
+
 import { useRouter } from "next/navigation";
 import { LessHoursAPI } from "../../hooks/schedule/less-hours";
+import { useNotifications } from "@toolpad/core";
 
 interface ForthCardProps {
 	subjects: any;
@@ -9,15 +12,29 @@ export default function ForthCard({
 	subjects,
 }: ForthCardProps) {
 	const router = useRouter();
+	const notifications = useNotifications();
 
 	const sendResume = async () => {
+		notifications.show("Processing request, please wait...", {
+			severity: "info",
+			autoHideDuration: 4000,
+		});
+
 		try {
 			const response = await LessHoursAPI.generateSchedule(subjects);
 			localStorage.setItem("schedule", JSON.stringify(response));
-		} catch (error) {
-			console.error("Error fetching resume:", error);
-		} finally {
+
+			notifications.show("Request completed successfully", {
+				severity: "success",
+				autoHideDuration: 4000,
+			});
+
 			router.push("/schedule");
+		} catch (error) {
+			notifications.show("An error occurred during your request", {
+				severity: "error",
+				autoHideDuration: 4000,
+			});
 		}
 	}
 
