@@ -8,7 +8,6 @@ export default function HowToUseSection() {
 			className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 p-6 md:p-10 lg:p-16"
 			id="htu"
 		>
-			{/* Texto y Botón */}
 			<div className="flex flex-col gap-6 w-full md:w-1/2 text-center md:text-left">
 				<h2 className="text-3xl sm:text-4xl font-bold">
 					How It <span className="text-gradient">Works</span>
@@ -20,12 +19,11 @@ export default function HowToUseSection() {
 
 				<button
 					onClick={() => setIsManual(!isManual)}
-					className="py-2 px-4 w-40 mx-auto md:mx-0 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! transition-all duration-300"
+					className="py-2 px-4 w-60 cursor-pointer mx-auto md:mx-0 bg-gradient-to-r from-[#FEECE3] to-[#FFA9CC] rounded-3xl hover:from-[#FFA9CC] hover:to-[#FEECE3] text-black font-semibold! transition-all duration-300"
 				>
-					{isManual ? "Wizard Mode" : "Import Mode"}
+					Change to {isManual ? "File" : "Wizard"} Mode
 				</button>
 
-				{/* Lista de Pasos */}
 				<div className="flex flex-col gap-5">
 					<ul className="space-y-4 w-full">
 						{isManual ? (
@@ -47,16 +45,21 @@ export default function HowToUseSection() {
 				</div>
 			</div>
 
-			{/* Video */}
-			<video className="rounded-2xl shadow-lg w-full max-w-md lg:max-w-lg" controls autoPlay loop muted>
-				<source src={isManual ? "/videos/manual.mp4" : "/videos/excel.mp4"} type="video/mp4" />
+			<video
+				key={isManual ? "manual" : "file"}
+				className="rounded-2xl shadow-lg w-full max-w-md lg:max-w-lg"
+				controls
+				autoPlay
+				loop
+				muted
+			>
+				<source src={isManual ? "/videos/wizard.mp4" : "/videos/file.mp4"} type="video/mp4" />
 				Your browser does not support the video tag.
 			</video>
 		</section>
 	);
 }
 
-// Componente reutilizable para cada paso
 function Step({ number, text }: { number: string; text: string }) {
 	return (
 		<li className="flex items-center text-start gap-3 text-sm sm:text-base">
